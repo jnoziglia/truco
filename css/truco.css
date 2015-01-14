@@ -1,0 +1,8 @@
+.carta{
+	border:1px solid #ccc;
+	width:150px;
+	margin-right:15px;
+	float:left;
+}
+.mis-cartas{padding:10px;}
+.juego{background-color: #0a0}
