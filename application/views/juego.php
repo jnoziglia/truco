@@ -1,11 +1,23 @@
 <script type="text/javascript">
 	$(document).ready(function(){
-		setInterval(function() {
+		
       		$(".mis-cartas").load('<?php echo base_url();?>index.php/home/traerCartas/'+<?php echo $this->uri->segment(3);?>+'/'+<?php echo $this->uri->segment(4);?>);
 			$(".juego").load('<?php echo base_url();?>index.php/home/getCartasTiradas/'+<?php echo $this->uri->segment(4);?>);
-		}, 2000);
+		
 		
 	});
+	function recargar(){
+	$(".mis-cartas").load('<?php echo base_url();?>index.php/home/traerCartas/'+<?php echo $this->uri->segment(3);?>+'/'+<?php echo $this->uri->segment(4);?>);
+			$(".juego").load('<?php echo base_url();?>index.php/home/getCartasTiradas/'+<?php echo $this->uri->segment(4);?>);
+			}
+</script>
+<script>
+$(function() {
+   var pusher = new Pusher('a391e528fa86fa408ff1');
+   var channel = pusher.subscribe('my_notifications');
+   var notifier = new PusherNotifier(channel);
+   recargar();
+ });
 </script>
 <div class="container">
 

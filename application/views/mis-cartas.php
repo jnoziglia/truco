@@ -18,7 +18,10 @@
 <?php 
 	if($turno->user_id != $this->uri->segment(4)){
 	foreach ($cartas as $carta) { ?>
-		<div class="carta mi-carta" data-id="<?php echo $carta->carta_id;?>" data-mano="<?php echo $carta->carta_mano_id;?>"><?php echo $carta->carta;?><br><?php echo $carta->palo;?></div>
+		<div class="carta mi-carta" data-id="<?php echo $carta->carta_id;?>" data-mano="<?php echo $carta->carta_mano_id;?>">
+			
+			<img src="<?php echo base_url();?>images/<?php echo $carta->carta;?>_<?php echo $carta->palo;?>.jpg" width="100"/>
+		</div>
 
 <?php } }else{?>
 Es el turno del otro jugador =)

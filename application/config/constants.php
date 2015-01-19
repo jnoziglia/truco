@@ -36,6 +36,12 @@ define('FOPEN_READ_WRITE_CREATE',				'a+b');
 define('FOPEN_WRITE_CREATE_STRICT',				'xb');
 define('FOPEN_READ_WRITE_CREATE_STRICT',		'x+b');
 
+//pusher
+error_reporting(E_ALL);
+
+define('APP_KEY', 'a391e528fa86fa408ff1');
+define('APP_SECRET', '161dcf6832d7e3e98285');
+define('APP_ID', '103531');
 
 /* End of file constants.php */
 /* Location: ./application/config/constants.php */

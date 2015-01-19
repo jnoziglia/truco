@@ -2,24 +2,20 @@
 <html lang="es">
     <head>
         <meta charset="utf-8" />
-        <title>8a Translations</title>
+        <title>Truco</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta name="description" content="" />
         <meta name="author" content="" />
         <?php echo add_style('bootstrap');?>
         <?php echo add_style('truco');?>
-
+        <?php echo add_style('gritter');?>
         <?php echo add_jscript('jquery');?>
+        <?php echo add_jscript('gritter.min');?>		
         <?php echo add_jscript('bootstrap.min');?>
+		<script src="//js.pusher.com/2.2/pusher.min.js"></script>
+        <?php echo add_jscript('pusherNotifier');?>
 
-       <script type="text/javascript">
-       		
-       		
-       		function iniciar(){
-       			$(".mis-cartas").load('<?php echo base_url();?>index.php/home/traerCartas/'+<?php echo $this->uri->segment(3);?>+'/'+<?php echo $this->uri->segment(4);?>);
-				$(".juego").load('<?php echo base_url();?>index.php/home/getCartasTiradas/'+<?php echo $this->uri->segment(4);?>);
-       		}
-       </script>       	
+      	
     </head>
 <body>
 <div class="row resetMargin">
