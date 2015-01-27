@@ -15,6 +15,13 @@ class Cartas extends CI_Model {
     	return $partidas->result();
     }
 
+    public function getPartida(){
+    	$this->db->select_max('id');
+    	$this->db->from('partidas');
+    	$partida = $this->db->get();
+    	return $partida->row();
+    }
+
     public function crearPartida($user_id){
     	$insert['fecha'] = '';
 		$insert['jugador1'] = $user_id;
@@ -159,6 +166,16 @@ class Cartas extends CI_Model {
 		$cartas2 = $this->db->get()->result();
 		$cantCartas2 = count($cartas2);
 
+		//cerrar ronda
+
+		//HAY QUE VER QUE GAROMPA PASA ACA
+		if(($cantCartas1 + $cantCartas2) == 6){
+					$partida = $this->getPartida();
+					
+					$this->barajar($partida);
+				}
+
+		//la logica by Julian		
 		if ($cantCartas1 > $cantCartas2) {
 			/*$this->db->select('jugador1');
 			$this->db->from('partidas');
@@ -211,6 +228,9 @@ class Cartas extends CI_Model {
 				}
 			}
 		}
+
+		
+		
 	}
 }
 
