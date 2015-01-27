@@ -100,6 +100,7 @@ public function jugarPartida($partida_id, $user_id){
     $carta_mano_id = $this->input->post('carta_mano_id');
     $this->cartas->insertCarta($carta_id, $user_id, $carta_mano_id);
     $usuario = $this->cartas->comprobarTurno($user_id);
+    //echo $this->db->last_query();
     $this->cartas->setTurno($usuario);
   	//pusher
   	require_once('lib/Pusher.php');

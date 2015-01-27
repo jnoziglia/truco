@@ -169,20 +169,21 @@ class Cartas extends CI_Model {
 			return 2;
 		}
 		else {
-/*
-			$this->db->select('ct.carta_id');
-			$this->db->from('cartas_tiradas1 ct');
-			$this->db->where('ct.id', $cantCartas1);
-			$this->db->join('cartas c', 'c.id = ct.carta_id');
-			$valor1 = $this->db->get()->row()->valor;
 
-			$this->db->select('ct.carta_id');
-			$this->db->from('cartas_tiradas2 ct');
-			$this->db->where('ct.id', $cantCartas1);
+			$this->db->select('*');
+			$this->db->from('cartas_tiradas1 ct');
 			$this->db->join('cartas c', 'c.id = ct.carta_id');
-			$valor2 = $this->db->get()->row()->valor;
-*/
-			$query1 = $this->db->query("SELECT cartas.valor FROM cartas_tiradas1, cartas WHERE cartas_tiradas1.carta_id = cartas.id AND cartas_tiradas1.id =" . $cantCartas1);
+			$this->db->where('ct.id', $cantCartas1);
+			$valor1 = $this->db->get()->row();
+
+			$this->db->select('*');
+			$this->db->from('cartas_tiradas2 ct');
+			$this->db->join('cartas c', 'c.id = ct.carta_id');
+			$this->db->where('ct.id', $cantCartas2);
+			$valor2 = $this->db->get()->row();
+
+
+			/*$query1 = $this->db->query("SELECT cartas.valor FROM cartas_tiradas1, cartas WHERE cartas_tiradas1.carta_id = cartas.id AND cartas_tiradas1.id =" . $cantCartas1);
 			$query2 = $this->db->query("SELECT cartas.valor FROM cartas_tiradas1, cartas WHERE cartas_tiradas2.carta_id = cartas.id AND cartas_tiradas2.id =" . $cantCartas2);
 
 			foreach ($query1->result() as $row1)
@@ -193,7 +194,7 @@ class Cartas extends CI_Model {
 		    foreach ($query2->result() as $row1)
 		    {
 		      $valor2 = $row->valor;
-		    }
+		    }*/
 
 			if ($valor1 > $valor2) {
 				return 2;
