@@ -172,7 +172,7 @@ class Cartas extends CI_Model {
 		if(($cantCartas1 + $cantCartas2) == 6){
 					$partida = $this->getPartida();
 					
-					$this->barajar($partida);
+					$this->barajar($partida->id);
 				}
 
 		//la logica by Julian		
