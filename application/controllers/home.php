@@ -43,6 +43,7 @@ class Home extends CI_Controller {
         $data['username'] = $session_data['username'];
         $user_id = $session_data['id'];
         $partida_id = $this->cartas->crearPartida($user_id);
+        $this->cartas->setTurno($user_id);
         redirect('home/jugarPartida/'.$partida_id.'/'.$user_id);
        
        }else{
@@ -83,6 +84,7 @@ public function jugarPartida($partida_id, $user_id){
  public function traerCartas($partida_id, $user_id){
   $data['cartas'] = $this->cartas->getCartas($partida_id, $user_id);
   $data['turno'] = $this->cartas->getTurno();
+  $data['partida'] = $partida_id;
   //echo $this->db->last_query();
   $this->load->view('mis-cartas', $data);
  }
@@ -97,7 +99,8 @@ public function jugarPartida($partida_id, $user_id){
     $user_id = $this->input->post('user_id');
     $carta_mano_id = $this->input->post('carta_mano_id');
     $this->cartas->insertCarta($carta_id, $user_id, $carta_mano_id);
-    $this->cartas->comprobarTurno();
+    $usuario = $this->cartas->comprobarTurno($user_id);
+    $this->cartas->setTurno($usuario);
   	//pusher
   	require_once('lib/Pusher.php');
 
