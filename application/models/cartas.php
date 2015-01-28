@@ -153,6 +153,13 @@ class Cartas extends CI_Model {
 		$this->db->update('cartas_tiradas1', $update);
 		$this->db->update('cartas_tiradas2', $update);
 	}
+	
+	public function setScore($user_id, $partida_id, $score){
+		$insert['puntos'] = $score;
+		$insert['user_id'] = $user_id;
+		$insert['partida_id'] = $partida_id;
+		$this->db->insert('puntajes', $insert);
+	}
 
 	public function comprobarTurno($user_id){
 		$this->db->select('*');
@@ -166,9 +173,7 @@ class Cartas extends CI_Model {
 		$cartas2 = $this->db->get()->result();
 		$cantCartas2 = count($cartas2);
 
-		//cerrar ronda
-
-		//HAY QUE VER QUE GAROMPA PASA ACA
+		//cerrar ronda y volver a barajar
 		if(($cantCartas1 + $cantCartas2) == 6){
 					$partida = $this->getPartida();
 					
