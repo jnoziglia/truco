@@ -30,7 +30,7 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				  </button>
-				  <a class="navbar-brand" href="<?php echo base_url();?>dashboard"><img src="<?=base_url();?>images/logo_8a.png" /></a>
+				  <a class="navbar-brand" href="<?php echo base_url();?>dashboard">TRUCO</a>
 				</div>
 				
 			

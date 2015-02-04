@@ -23,7 +23,6 @@ class Cartas extends CI_Model {
     }
 
     public function crearPartida($user_id){
-    	$insert['fecha'] = '';
 		$insert['jugador1'] = $user_id;
 		$this->db->insert('partidas', $insert);
 		$partida_id = $this->db->insert_id();

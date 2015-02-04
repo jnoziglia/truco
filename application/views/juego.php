@@ -53,4 +53,3 @@ $(function() {
 </div>
 
 </div>
-<input type="hidden" value="<?php echo $this->uri->segment(4);?>" id="user_id"/>

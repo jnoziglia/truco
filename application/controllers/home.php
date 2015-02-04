@@ -5,58 +5,33 @@ class Home extends CI_Controller {
   function __construct()
   {
     parent::__construct();
-
+		$this->load->helper('url');
+		$this->load->library('tank_auth');
   }
 
-  function index()
-  {
-    if($this->session->userdata('logged_in'))
-    {
-      $this->load->helper('url');
-      $session_data = $this->session->userdata('logged_in');
-      $data['username'] = $session_data['username'];
-      $data['id'] = $session_data['id'];
-
-
-      //traigo las partidas
-      $data['partidas'] = $this->cartas->getPartidas();
-
-      echo $this->db->last_query();
-      $this->layout->view('home_view', $data);
-    }else{
-      //If no session, redirect to login page
-      redirect('login', 'refresh');
-	}
-  }
   
-  function logout()
-  {
-    $this->session->unset_userdata('logged_in');
-    session_destroy();
-    redirect('home', 'refresh');
-  }
+function index()
+	{
+		if (!$this->tank_auth->is_logged_in()) {
+			redirect('/auth/login/');
+		} else {
+			$data['user_id'] = $this->tank_auth->get_user_id();
+			$data['username'] = $this->tank_auth->get_username();
+			$data['partidas'] = $this->cartas->getPartidas();
+			$this->layout->view('home_view', $data);
+		}
+	}
 
   public function crearPartida(){
-    if($this->session->userdata('logged_in')){
-        $this->load->helper('url');
-        $session_data = $this->session->userdata('logged_in');
-        $data['username'] = $session_data['username'];
-        $user_id = $session_data['id'];
+
+        $user_id = $this->tank_auth->get_user_id();
         $partida_id = $this->cartas->crearPartida($user_id);
         $this->cartas->setTurno($user_id);
         redirect('home/jugarPartida/'.$partida_id.'/'.$user_id);
-       
-       }else{
-      //If no session, redirect to login page
-      redirect('login', 'refresh');
-  }
+    
   }
   public function unirsePartida($partida_id,$user_id){
-     if($this->session->userdata('logged_in')){
-        $this->load->helper('url');
-        $session_data = $this->session->userdata('logged_in');
-        $data['username'] = $session_data['username'];
-
+    
         $update['jugador2'] = $user_id;
         $this->db->where('id', $partida_id);
         $this->db->update('partidas', $update);
@@ -64,17 +39,10 @@ class Home extends CI_Controller {
        
        redirect('home/jugarPartida/'.$partida_id.'/'.$user_id);
 
-    }else{
-      //If no session, redirect to login page
-      redirect('login', 'refresh');
-  }
-
-
   }
 
 
 public function jugarPartida($partida_id, $user_id){
-    
     $data['cartas'] = $this->cartas->getCartas($partida_id, $user_id);
     $data['turno'] = $this->cartas->getTurno();
     $this->layout->view('juego', $data);
